@@ -68,11 +68,11 @@ async (req, res) => {
   };
   //Build social object
   profileFields.social = {};
-  if (youtube) profileFields.youtube = youtube;
-  if (twitter) profileFields.twitter = twitter;
-  if (facebook) profileFields.facebook = facebook;
-  if (linkedin) profileFields.linkedin = linkedin;
-  if (instagram) profileFields.instagram = instagram;
+  if (youtube) profileFields.social.youtube = youtube;
+  if (twitter) profileFields.social.twitter = twitter;
+  if (facebook) profileFields.social.facebook = facebook;
+  if (linkedin) profileFields.social.linkedin = linkedin;
+  if (instagram) profileFields.social.instagram = instagram;
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });
@@ -130,8 +130,8 @@ router.get('/user/:user_id', async (req, res) => {
 });
 
 // @route  DELETE api/profile
-// @desc   Delete profile
-// @access Public
+// @desc   Delete profile, user & posts
+// @access Private
 
 router.delete('/', auth, async (req, res) => {
   try {
@@ -145,5 +145,53 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route  PUT api/profile/experience
+// @desc   Update profile experience
+// @access Private
+
+router.put('/experience', [auth, [
+  check('title', 'Title is required').not().isEmpty(),
+  check('company', 'Company is required').not().isEmpty(),
+  check('from', 'From date is required').not().isEmpty(),
+]], 
+async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  };
+
+  const {
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    description
+  } = req.body;
+
+  const newExp = {
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    description
+  }
+
+try {
+  const profile = await Profile.findOne({ user: req.user.id });
+
+  profile.experience.unshift(newExp);
+
+  await profile.save();
+  res.json(profile);
+} catch (err) {
+  console.error(err.message);
+  res.status(500).send({ msg: 'Profile not found'})
+}
+})
 
 module.exports = router;
