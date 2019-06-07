@@ -152,7 +152,7 @@ router.delete('/', auth, async (req, res) => {
 // @desc   Update profile experience
 // @access Private
 
-router.put('/experience', [auth, [
+router.put('/experience', [ auth, [
   check('title', 'Title is required').not().isEmpty(),
   check('company', 'Company is required').not().isEmpty(),
   check('from', 'From date is required').not().isEmpty(),
@@ -221,7 +221,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 // @desc   Update profile education
 // @access Private
 
-router.put('/education', [auth, [
+router.put('/education', [ auth, [
   check('school', 'School is required').not().isEmpty(),
   check('degree', 'Degree is required').not().isEmpty(),
   check('fieldofstudy', 'Field of study is required').not().isEmpty(),
