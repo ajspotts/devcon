@@ -56,7 +56,7 @@ async (req, res) => {
     linkedin
   } = req.body;
 
-  //Build profile object
+  // Build profile object
   const profileFields = {};
   profileFields.user = req.user.id;
   if (company) profileFields.company = company;
@@ -68,7 +68,7 @@ async (req, res) => {
   if (skills) {
     profileFields.skills = skills.split(',').map(skill => skill.trim());
   };
-  //Build social object
+  // Build social object
   profileFields.social = {};
   if (youtube) profileFields.social.youtube = youtube;
   if (twitter) profileFields.social.twitter = twitter;
@@ -80,7 +80,7 @@ async (req, res) => {
     let profile = await Profile.findOne({ user: req.user.id });
     
     if(profile) {
-      //Update profile
+      // Update profile
       profile = await Profile.findOneAndUpdate(
         { user: req.user.id }, 
         { $set: profileFields }, 
@@ -89,7 +89,7 @@ async (req, res) => {
 
         return res.json(profile);
     }
-    //Create profile
+    // Create profile
     profile = new Profile(profileFields);
     await profile.save();
     res.json(profile);
@@ -137,9 +137,9 @@ router.get('/user/:user_id', async (req, res) => {
 
 router.delete('/', auth, async (req, res) => {
   try {
-    //Remove profile
+    // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
-    //Remove User
+    // Remove User
     await User.findOneAndRemove({ _id: req.user.id})
     res.json({ msg: 'User has been removed' });
   } catch (err) {
