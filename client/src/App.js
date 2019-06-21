@@ -19,6 +19,7 @@ import { loadUser } from './actions/auth';
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
+    console.log('Hiiiii');
   }, []);
 
   return (
