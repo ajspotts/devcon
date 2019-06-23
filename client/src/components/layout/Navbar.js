@@ -1,15 +1,25 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
-import PropTypes from 'prop-types';
 
 const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
   const authLinks = (
-    <a href='#!' onClick={logout}>
-      <i className='fas fa-sign-out-alt' />{' '}
-      <span className='hide-sm'>Logout</span>
-    </a>
+    <ul>
+      <li>
+        <Link to='/dashboard'>
+          <i className='fas fa-user' />{' '}
+          <span className='hide-sm'>Dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <a href='#!' onClick={logout}>
+          <i className='fas fa-sign-out-alt' />{' '}
+          <span className='hide-sm'>Logout</span>
+        </a>
+      </li>
+    </ul>
   );
 
   const guestLinks = (
