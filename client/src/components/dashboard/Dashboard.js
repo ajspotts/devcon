@@ -19,9 +19,9 @@ const Dashboard = ({
   ) : (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
-      <h3 className='lead'>
+      <p className='lead'>
         <i className='fas fa-user' /> Welcome to DevNetwork {user && user.name}!
-      </h3>
+      </p>
       {profile !== null ? (
         <Fragment>has</Fragment>
       ) : (

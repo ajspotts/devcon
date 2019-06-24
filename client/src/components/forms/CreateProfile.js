@@ -37,8 +37,8 @@ const CreateProfile = props => {
     <Fragment>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
-        <i className='fas fa-user' />
-        Enter some information about yourself to make your profile stand out
+        <i className='fas fa-user' /> Enter some information about yourself to
+        make your profile stand out
       </p>
       <small>* = required field</small>
       <form className='form'>
