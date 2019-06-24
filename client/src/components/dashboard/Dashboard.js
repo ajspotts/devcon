@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
@@ -18,13 +19,22 @@ const Dashboard = ({
   ) : (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
-        <i className='fas fa-user'> Welcome {user && user.name}</i>
-      </p>
+      <h3 className='lead'>
+        <i className='fas fa-user' /> Welcome to DevNetwork {user && user.name}!
+      </h3>
       {profile !== null ? (
         <Fragment>has</Fragment>
       ) : (
-        <Fragment>has not</Fragment>
+        <Fragment>
+          <p>
+            You haven't set up a profile yet. <i class='far fa-surprise' />
+            <br />
+            Please create one to add some information about yourself.
+          </p>
+          <Link to='/create-profile' className='btn btn-primary my-1'>
+            Create Profile
+          </Link>
+        </Fragment>
       )}
     </Fragment>
   );
