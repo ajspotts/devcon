@@ -24,7 +24,9 @@ const Dashboard = ({
         <i className='fas fa-user' /> Welcome to DevNetwork {user && user.name}!
       </p>
       {profile !== null ? (
-        <Fragment>has</Fragment>
+        <Fragment>
+          <DashboardActions />
+        </Fragment>
       ) : (
         <Fragment>
           <p>
