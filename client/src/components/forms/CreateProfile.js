@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createProfile } from '../../actions/profile';
 
 const CreateProfile = props => {
   const [formData, setFormData] = useState({
@@ -37,6 +38,8 @@ const CreateProfile = props => {
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = () => {};
 
   return (
     <Fragment>
@@ -203,7 +206,11 @@ const CreateProfile = props => {
             </div>
           </Fragment>
         )}
-        <input type='submit' className='btn btn-primary my-1' />
+        <input
+          type='submit'
+          className='btn btn-primary my-1'
+          onSubmit={() => onSubmit()}
+        />
         <a className='btn btn-light my-1' href='dashboard.html'>
           Go Back
         </a>
