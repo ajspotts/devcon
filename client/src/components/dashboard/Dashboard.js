@@ -27,7 +27,7 @@ const Dashboard = ({
       ) : (
         <Fragment>
           <p>
-            You haven't set up a profile yet. <i class='far fa-surprise' />
+            You haven't set up a profile yet. <i className='far fa-surprise' />
             <br />
             Please create one to add some information about yourself.
           </p>
