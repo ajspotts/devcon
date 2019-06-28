@@ -3,6 +3,7 @@ import { setAlert } from './alert';
 import {
   GET_PROFILE,
   GET_PROFILES,
+  GET_REPOS,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   DELETE_ACCOUNT,
@@ -53,6 +54,24 @@ export const getProfileById = userId => async dispatch => {
 
     dispatch({
       type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get github repos
+
+export const getGithubRepos = username => async dispatch => {
+  try {
+    const res = axios.get(`/api/profile/github/${username}`);
+
+    dispatch({
+      type: GET_REPOS,
       payload: res.data
     });
   } catch (err) {
