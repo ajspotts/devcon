@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 
@@ -13,11 +14,20 @@ const Profile = ({
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id]);
-  return loading ? (
+  return profile === null || loading ? (
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>{profile}</h1>
+      <Link to='/profiles' className='btn btn-light'>
+        Back to Profiles
+      </Link>
+      {auth.loading === false &&
+        auth.isAuthenticated &&
+        auth.user._id === profile.user._id && (
+          <Link to='/edit-profile' className='btn btn-primary'>
+            Edit Profile
+          </Link>
+        )}
     </Fragment>
   );
 };
