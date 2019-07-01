@@ -67,11 +67,20 @@ router.post(
       linkedin
     } = req.body;
 
+    // Check urls for https://
+
+    const checkUrl = url => {
+      if (!/^(f|ht)tps?:\/\//i.test(url)) {
+        url = 'https://' + url;
+      }
+      return url;
+    };
+
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
     profileFields.company = company;
-    profileFields.website = website;
+    profileFields.website = checkUrl(website);
     profileFields.location = location;
     profileFields.bio = bio;
     profileFields.status = status;
@@ -80,11 +89,11 @@ router.post(
 
     // Build social object
     profileFields.social = {};
-    profileFields.social.youtube = youtube;
-    profileFields.social.twitter = twitter;
-    profileFields.social.facebook = facebook;
-    profileFields.social.linkedin = linkedin;
-    profileFields.social.instagram = instagram;
+    profileFields.social.youtube = checkUrl(youtube);
+    profileFields.social.twitter = checkUrl(twitter);
+    profileFields.social.facebook = checkUrl(facebook);
+    profileFields.social.linkedin = checkUrl(linkedin);
+    profileFields.social.instagram = checkUrl(instagram);
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
