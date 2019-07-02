@@ -79,21 +79,39 @@ router.post(
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
-    profileFields.company = company;
-    profileFields.website = checkUrl(website);
-    profileFields.location = location;
-    profileFields.bio = bio;
-    profileFields.status = status;
-    profileFields.githubusername = githubusername;
-    profileFields.skills = skills.split(',').map(skill => skill.trim());
+    company ? (profileFields.company = company) : (profileFields.company = '');
+    website
+      ? (profileFields.website = checkUrl(website))
+      : (profileFields.website = '');
+    location
+      ? (profileFields.location = location)
+      : (profileFields.location = '');
+    bio ? (profileFields.bio = bio) : (profileFields.bio = '');
+    status ? (profileFields.status = status) : (profileFields.status = '');
+    githubusername
+      ? (profileFields.githubusername = githubusername)
+      : (profileFields.githubusername = '');
+    skills
+      ? (profileFields.skills = skills.split(',').map(skill => skill.trim()))
+      : (profileFields.skills = '');
 
     // Build social object
     profileFields.social = {};
-    profileFields.social.youtube = checkUrl(youtube);
-    profileFields.social.twitter = checkUrl(twitter);
-    profileFields.social.facebook = checkUrl(facebook);
-    profileFields.social.linkedin = checkUrl(linkedin);
-    profileFields.social.instagram = checkUrl(instagram);
+    youtube
+      ? (profileFields.social.youtube = checkUrl(youtube))
+      : (profileFields.social.youtube = '');
+    twitter
+      ? (profileFields.social.twitter = checkUrl(twitter))
+      : (profileFields.social.twitter = '');
+    facebook
+      ? (profileFields.social.facebook = checkUrl(facebook))
+      : (profileFields.social.facebook = '');
+    linkedin
+      ? (profileFields.social.linkedin = checkUrl(linkedin))
+      : (profileFields.social.linkedin = '');
+    instagram
+      ? (profileFields.social.instagram = checkUrl(instagram))
+      : (profileFields.social.instagram = '');
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
