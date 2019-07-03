@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -45,7 +45,10 @@ const PostItem = ({
   );
 };
 
-PostItem.propTypes = {};
+PostItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth
