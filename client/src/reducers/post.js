@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  CREATE_POST,
   DELETE_POST,
   POST_ERROR,
   UPDATE_LIKES
@@ -18,6 +19,12 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         posts: payload,
+        loading: false
+      };
+    case CREATE_POST:
+      return {
+        ...state,
+        posts: [...state.posts, payload],
         loading: false
       };
     case DELETE_POST:
