@@ -2,6 +2,7 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_POSTS,
+  GET_POST,
   POST_ERROR,
   UPDATE_LIKES,
   CREATE_POST,
@@ -25,6 +26,25 @@ export const getPosts = () => async dispatch => {
     });
   }
 };
+
+// Get post
+
+export const getPost = postId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/profile/${postId}`);
+
+    dispatch({
+      type: GET_POST,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.data.msg, status: err.response.status }
+    });
+  }
+};
+
 // Add like
 
 export const addLike = postId => async dispatch => {
