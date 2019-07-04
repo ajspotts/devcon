@@ -3,14 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPost } from '../../actions/post';
 
-const CreatePost = createPost => {
+const CreatePost = ({ createPost }) => {
   const [text, setText] = useState('');
-
-  const onSubmit = e => {
-    e.preventDefault();
-    createPost({ text });
-    setText('');
-  };
 
   return (
     <Fragment>
@@ -18,7 +12,14 @@ const CreatePost = createPost => {
         <div className='post-form-header bg-primary p'>
           <h3>What would you like to say today?</h3>
         </div>
-        <form className='form my-1' onSubmit={e => onSubmit(e)}>
+        <form
+          className='form my-1'
+          onSubmit={e => {
+            e.preventDefault();
+            createPost({ text });
+            setText('');
+          }}
+        >
           <textarea
             name='text'
             value={text}
