@@ -31,7 +31,7 @@ export const getPosts = () => async dispatch => {
 
 export const getPost = postId => async dispatch => {
   try {
-    const res = await axios.get(`/api/profile/${postId}`);
+    const res = await axios.get(`/api/posts/${postId}`);
 
     dispatch({
       type: GET_POST,
