@@ -127,7 +127,7 @@ export const deletePost = postId => async dispatch => {
   }
 };
 
-// Create Post
+// Create Comment
 
 export const addComment = (postId, formData) => async dispatch => {
   try {
