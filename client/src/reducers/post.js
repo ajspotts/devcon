@@ -3,6 +3,8 @@ import {
   GET_POST,
   CREATE_POST,
   DELETE_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
   POST_ERROR,
   UPDATE_LIKES
 } from '../actions/types';
@@ -38,6 +40,22 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         posts: state.posts.filter(post => post._id !== payload),
+        loading: false
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload }
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            comment => comment._id !== payload
+          )
+        },
         loading: false
       };
     case POST_ERROR:
