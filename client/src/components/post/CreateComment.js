@@ -34,6 +34,7 @@ const CreateComment = ({ postId, addComment }) => {
 };
 
 CreateComment.propTypes = {
+  postId: PropTypes.string.isRequired,
   addComment: PropTypes.func.isRequired
 };
 
