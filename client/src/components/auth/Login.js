@@ -1,10 +1,14 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { login } from '../../actions/auth';
+import { clearProfile } from '../../actions/profile';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ clearProfile, login, isAuthenticated }) => {
+  useEffect(() => {
+    clearProfile();
+  }, [clearProfile]);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -62,6 +66,7 @@ const Login = ({ login, isAuthenticated }) => {
 };
 
 Login.propTypes = {
+  clearProfile: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
@@ -72,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  { clearProfile, login }
 )(Login);

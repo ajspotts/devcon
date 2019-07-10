@@ -28,10 +28,20 @@ export const getProfile = () => async dispatch => {
   }
 };
 
+// Clear profile
+
+export const clearProfile = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
+};
+
 // Get all profiles
 
 export const getProfiles = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
+  dispatch({
+    type: CLEAR_PROFILE
+  });
   try {
     const res = await axios.get('/api/profile');
 
